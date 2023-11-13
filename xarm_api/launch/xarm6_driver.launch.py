@@ -10,6 +10,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
+from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
@@ -47,7 +48,7 @@ def generate_launch_description():
     # robot driver launch
     # xarm_api/launch/_robot_driver.launch.py
     robot_driver_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/_robot_driver.launch.py']),
+        PythonLaunchDescriptionSource([get_package_share_directory('xarm_api'), '/launch/_robot_driver.launch.py']),
         launch_arguments={
             'robot_ip': robot_ip,
             'report_type': report_type,
